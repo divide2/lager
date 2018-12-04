@@ -1,15 +1,17 @@
 import request from '@/utils/request'
+import qs from 'qs'
+import Api from './Api'
 
 export function loginByUsername(username, password) {
-  const data = {
+  const params = {
     username,
-    password
+    password,
+    grant_type: 'password'
   }
-  return request({
-    url: '/mock/login/login',
-    method: 'post',
-    data
-  })
+  const headers = {
+    Authorization: 'Basic ' + btoa(`aiNzsAXE8tkOFJN6:12345678`)
+  }
+  return Api.post('/api/oauth/token', qs.stringify(params), headers)
 }
 
 export function logout() {
@@ -20,10 +22,9 @@ export function logout() {
 }
 
 export function getUserInfo(token) {
-  return request({
-    url: '/mock/user/info',
-    method: 'get',
-    params: { token }
-  })
+  const headers = {
+    Authorization: `bearer ${token}`
+  }
+  return Api.get('/api/user', {}, headers)
 }
 

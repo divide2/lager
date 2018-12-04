@@ -5,7 +5,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const port = 8081 // TODO: change to Settings
+const port = 9527 // TODO: change to Settings
 
 // Explanation of each configuration item You can find it in https://cli.vuejs.org/config/
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: `http://localhost:${port}/`,
+        target: `http://localhost:8081/`,
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

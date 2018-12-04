@@ -39,14 +39,6 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">{{ $t('login.logIn') }}</el-button>
 
-      <div class="tips">
-        <span>{{ $t('login.username') }} : admin</span>
-        <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-      </div>
-      <div class="tips">
-        <span style="margin-right:18px;">{{ $t('login.username') }} : editor</span>
-        <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-      </div>
 
       <el-button class="thirdparty-button" type="primary" @click="showDialog=true">{{ $t('login.thirdparty') }}</el-button>
     </el-form>
@@ -71,13 +63,6 @@ export default {
   name: 'Login',
   components: { LangSelect, SocialSign },
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
@@ -87,11 +72,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '1111111'
+        username: '',
+        password: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        username: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -221,7 +206,7 @@ $light_gray:#eee;
     position: absolute;
     left: 0;
     right: 0;
-    width: 520px;
+    width: 420px;
     max-width: 100%;
     padding: 35px 35px 15px 35px;
     margin: 120px auto;
@@ -270,8 +255,8 @@ $light_gray:#eee;
   }
   .thirdparty-button {
     position: absolute;
+    bottom: 0px;
     right: 35px;
-    bottom: 28px;
   }
 }
 </style>
