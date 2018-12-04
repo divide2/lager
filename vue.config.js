@@ -5,7 +5,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const port = 9527 // TODO: change to Settings
+const port = 8081 // TODO: change to Settings
 
 // Explanation of each configuration item You can find it in https://cli.vuejs.org/config/
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: `http://localhost:${port}/mock`,
+        target: `http://localhost:${port}/`,
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
@@ -57,7 +57,7 @@ module.exports = {
   configureWebpack: {
     // We provide the app's title in Webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
-    name: 'vue-element-admin', // TODO: change to Settings
+    name: 'management', // TODO: change to Settings
     resolve: {
       alias: {
         '@': resolve('src')
