@@ -25,6 +25,6 @@ export function getUserInfo(token) {
   const headers = {
     Authorization: `bearer ${token}`
   }
-  return Api.get('/api/user', {}, headers)
+  return Api.get('/api/v1/user', {}, headers)
 }
 
