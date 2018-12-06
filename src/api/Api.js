@@ -40,7 +40,7 @@ const req = (url, data, method = 'get', headers) => {
       }
     }).catch((error) => {
       // todo 错误消息是否需要弹出，还是由前端处理后端错误消息在提交之前处理？？？
-      Message.error(error.response.data.message)
+      Message.error( error.response.data.error || error.response.data.message)
       reject(error)
     })
   })
