@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import qs from 'qs'
 import Api from './Api'
 
-export function loginByUsername(username, password) {
+export function loginByUsername (username, password) {
   const params = {
     username,
     password,
@@ -14,14 +14,14 @@ export function loginByUsername(username, password) {
   return Api.post('/api/oauth/token', qs.stringify(params), headers)
 }
 
-export function logout() {
-  return request({
-    url: '/mock/login/logout',
-    method: 'post'
-  })
+export function logout (token) {
+  const headers = {
+    Authorization: `bearer ${token}`
+  }
+  return Api.post('/api/v1/logout', {}, headers)
 }
 
-export function getUserInfo(token) {
+export function getUserInfo (token) {
   const headers = {
     Authorization: `bearer ${token}`
   }

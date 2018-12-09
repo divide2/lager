@@ -34,11 +34,6 @@
               {{ $t('navbar.dashboard') }}
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>
-              {{ $t('navbar.github') }}
-            </el-dropdown-item>
-          </a>
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
@@ -135,11 +130,13 @@ export default {
         line-height: initial;
         cursor: pointer;
         .user-avatar {
+          cursor: pointer;
           width: 40px;
           height: 40px;
           border-radius: 10px;
         }
         .el-icon-caret-bottom {
+          cursor: pointer;
           position: absolute;
           right: -20px;
           top: 25px;
