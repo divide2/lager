@@ -1,5 +1,7 @@
 'use strict'
 const path = require('path')
+const webpackConfig = require('webpack.config')
+
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -54,16 +56,7 @@ module.exports = {
       }
     }
   },
-  configureWebpack: {
-    // We provide the app's title in Webpack's name field, so that
-    // it can be accessed in index.html to inject the correct title.
-    name: 'management', // TODO: change to Settings
-    resolve: {
-      alias: {
-        '@': resolve('src')
-      }
-    }
-  },
+  configureWebpack: webpackConfig,
   chainWebpack(config) {
     config.plugins.delete('preload')// TODO: need test
     config.plugins.delete('prefetch')// TODO: need test
