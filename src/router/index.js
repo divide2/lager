@@ -3,6 +3,7 @@ import Router from 'vue-router'
 /* Layout */
 import Layout from '@/views/layout/Layout'
 import product from './modules/product'
+import stock from './modules/stock'
 /* Router Modules */
 
 Vue.use(Router)
@@ -80,6 +81,7 @@ export default new Router({
 
 export const asyncRouterMap = [
   /** When your routing table is too long, you can split it into small modules**/
+  stock,
   product,
   {
     path: '/base',

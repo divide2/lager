@@ -18,5 +18,8 @@ export default {
   },
   find(query) {
     return Api.get('/api/v1/product/find', query)
+  },
+  listProductSpec(productId) {
+    return Api.get(`/api/v1/product/${productId}/specs`)
   }
 }

@@ -167,5 +167,9 @@ export default {
     specPrice: '规格价格',
     composite: '配件',
     compositeAmount: '数量'
+  },
+  stock: {
+    product: '商品',
+    warehouse: '仓库'
   }
 }

@@ -5,7 +5,7 @@
         <el-input v-model="query.imei" :placeholder="$t('product.name')" style="width: 200px;" @keyup.enter.native="find"/>
       </query-item>
       <query-item slot="button">
-        <router-link class="filter-item" to="/product/add">
+        <router-link class="filter-item" to="/stock/add">
           <el-button type="primary" icon="el-icon-edit">{{ $t('table.add') }}</el-button>
         </router-link>
       </query-item>
@@ -16,7 +16,7 @@
       <el-table-column :label="$t('product.remarks')" prop="remarks" align="center"/>
       <el-table-column :label="$t('table.actions')" width="350" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <router-link :to="'/product/update/'+scope.row.id">
+          <router-link :to="'/stock/update/'+scope.row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">{{ $t('table.edit') }}</el-button>
           </router-link>
           <el-button type="danger" size="small" icon="el-icon-delete"
@@ -36,8 +36,7 @@
 import Pagination from '@/components/Pagination'
 import ProductApi from '@/api/ProductApi' // Secondary package based on el-pagination
 import Query from '@/views/components/Query'
-import QueryItem from '@/views/components/QueryItem'
-import MineApi from '@/api/MineApi' // Waves directive
+import QueryItem from '@/views/components/QueryItem' // Waves directive
 
 export default {
 
@@ -74,7 +73,7 @@ export default {
         size: this.query.size,
         page: this.query.page
       }
-      MineApi.findProducts(query).then(data => {
+      ProductApi.find(query).then(data => {
         this.list = data.content
         this.total = data.totalElements
         this.listLoading = false
