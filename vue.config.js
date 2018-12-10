@@ -1,6 +1,6 @@
 'use strict'
 const path = require('path')
-const webpackConfig = require('webpack.config')
+const webpackConfigJs = require('./webpack.config')
 
 
 function resolve(dir) {
@@ -56,7 +56,7 @@ module.exports = {
       }
     }
   },
-  configureWebpack: webpackConfig,
+  configureWebpack: webpackConfigJs,
   chainWebpack(config) {
     config.plugins.delete('preload')// TODO: need test
     config.plugins.delete('prefetch')// TODO: need test

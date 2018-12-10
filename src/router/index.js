@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 /* Layout */
 import Layout from '@/views/layout/Layout'
+import product from './modules/product'
 /* Router Modules */
 
 Vue.use(Router)
@@ -79,38 +80,7 @@ export default new Router({
 
 export const asyncRouterMap = [
   /** When your routing table is too long, you can split it into small modules**/
-  {
-    path: '/device',
-    component: Layout,
-    redirect: '/device/list',
-    name: 'Device',
-    meta: {
-      title: 'device',
-      icon: 'device'
-    },
-    children: [
-      {
-        path: 'create',
-        component: () => import('@/views/base/device/create'),
-        name: 'CreateDevice',
-        meta: { title: 'createDevice', icon: 'edit' },
-        hidden: true
-      },
-      {
-        path: 'edit/:id(\\d+)',
-        component: () => import('@/views/base/device/edit'),
-        name: 'EditDevice',
-        meta: { title: 'editDevice', noCache: true },
-        hidden: true
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/base/device/list'),
-        name: 'DeviceList',
-        meta: { title: 'deviceList', icon: 'list' }
-      }
-    ]
-  },
+  product,
   {
     path: '/base',
     component: Layout,
@@ -128,6 +98,6 @@ export const asyncRouterMap = [
         meta: { title: 'casesList', icon: 'list' }
       }
     ]
-  },
-  { path: '*', redirect: '/404', hidden: true }
+  }
+  // { path: '*', redirect: '/404', hidden: true }
 ]

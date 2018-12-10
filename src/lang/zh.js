@@ -128,7 +128,9 @@ export default {
     draft: '草稿',
     delete: '删除',
     cancel: '取 消',
-    confirm: '确 定'
+    confirm: '确 定',
+    addRow: '添加一条',
+    save: '保存'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -154,5 +156,16 @@ export default {
     close: '关闭',
     closeOthers: '关闭其它',
     closeAll: '关闭所有'
+  },
+  product: {
+    name: '名称',
+    warehouse: '仓库',
+    initAmount: '初始化数量',
+    image: '图片',
+    remarks: '备注',
+    specName: '规格名称',
+    specPrice: '规格价格',
+    composite: '配件',
+    compositeAmount: '数量'
   }
 }
