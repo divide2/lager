@@ -62,7 +62,10 @@ export default {
     theme: '换肤',
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
-    externalLink: '外链'
+    externalLink: '外链',
+    stockList: '仓库',
+    productList: '商品',
+    inStock: '入库'
   },
   navbar: {
     logOut: '退出登录',
@@ -170,6 +173,8 @@ export default {
   },
   stock: {
     product: '商品',
-    warehouse: '仓库'
+    warehouse: '仓库',
+    amount: '数量',
+    specAmount: '规格数量'
   }
 }

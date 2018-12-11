@@ -3,34 +3,22 @@
     <el-form ref="dataForm" :rules="rules" :model="product" label-position="right" label-width="150px"
              style="margin-top: 50px">
       <el-row>
-        <el-col :span="7">
+        <el-col :span="8">
           <el-form-item :label="$t('stock.warehouse')" prop="remarks">
             <mine-warehouse-select v-model="stock.warehouseId"></mine-warehouse-select>
           </el-form-item>
           <el-form-item :label="$t('stock.product')" prop="remarks">
             <mine-product-select v-model="stock.productId" @change="onProductChange"></mine-product-select>
           </el-form-item>
-        </el-col>
-        <el-col :span="7">
-          <el-col :span="14">
-            <el-form-item  label-width="50px">
-              {{ $t('product.specName') }}
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item  label-width="10px">
-              {{ $t('product.specPrice') }}
-            </el-form-item>
-          </el-col>
           <div v-for="(spec,index) in product.specs" :key="index">
             <el-col :span="14">
-              <el-form-item prop="specName" label-width="50px">
-                <el-input v-model="spec.name"/>
+              <el-form-item :label="$t('product.specName')" prop="specName">
+                {{ spec.name }}
               </el-form-item>
             </el-col>
-            <el-col :span="6">
-              <el-form-item  prop="specPrice" label-width="10px">
-                <el-input v-model="spec.price"/>
+            <el-col :span="8">
+              <el-form-item :label="$t('stock.specAmount')" prop="specPrice" label-width="80px">
+                <el-input v-model="stock.specStocks[index].amount"/>
               </el-form-item>
             </el-col>
           </div>
@@ -44,13 +32,13 @@
       </el-col>
     </el-row>
   </div>
-
 </template>
 
 <script>
 import ProductApi from '@/api/ProductApi'
 import MineWarehouseSelect from '@/views/stock/stock/components/MineWarehouseSelect'
 import MineProductSelect from '@/views/stock/stock/components/MineProductSelect'
+import StockApi from '@/api/StockApi'
 
 export default {
   name: 'StockDetail',
@@ -65,7 +53,8 @@ export default {
     return {
       stock: {
         warehouseId: null,
-        productId: null
+        productId: null,
+        specStocks: []
       },
       product: {
         specs: []
@@ -75,7 +64,7 @@ export default {
   },
   created() {
     if (this.isEdit) {
-      this.product.id = this.$route.params.id
+      this.stock.productId = this.$route.params.id
       this.get()
     }
   },
@@ -87,11 +76,11 @@ export default {
     save() {
       this.$refs['dataForm'].validate().then(() => {
         if (this.isEdit) {
-          return ProductApi.update(this.product)
+          return StockApi.update(this.stock)
         } else {
-          return ProductApi.add(this.product)
+          return StockApi.add(this.stock)
         }
-      }).then(() => this.toList())
+      }).then(() => this.back())
     },
     get() {
       ProductApi.get(this.product.id).then(data => {
@@ -101,7 +90,8 @@ export default {
     },
     onProductChange(productId) {
       ProductApi.listProductSpec(productId).then(data => {
-        this.product.specs = data;
+        this.product.specs = data
+        this.stock.specStocks.push(...(data.map(item => ({ productSpecId: item.id, amount: 0 }))))
       })
     },
     /**
@@ -113,10 +103,8 @@ export default {
     cancel() {
       this.$router.back()
     },
-    toList() {
-      this.$router.push({
-        path: '/product/list'
-      })
+    back() {
+      this.$router.back()
     }
   }
 }

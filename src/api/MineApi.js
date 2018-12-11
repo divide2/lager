@@ -7,7 +7,10 @@ export default {
   listProducts() {
     return Api.get('/api/v1/mine/products')
   },
-  findProducts() {
-    return Api.get('/api/v1/mine/products/find')
+  findProducts(query) {
+    return Api.get('/api/v1/mine/products/find', query)
+  },
+  findStock(query) {
+    return Api.get('/api/v1/mine/stocks', query)
   }
 }

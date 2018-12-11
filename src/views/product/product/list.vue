@@ -12,6 +12,9 @@
     </query>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" prop="id" width="80"/>
+      <el-table-column align="center" label="ID" prop="id" width="100">
+        <img slot-scope="{row}" :src="row.image" width="90" height="90"/>
+      </el-table-column>
       <el-table-column :label="$t('product.name')" width="160px" prop="name" align="center" />
       <el-table-column :label="$t('product.remarks')" prop="remarks" align="center"/>
       <el-table-column :label="$t('table.actions')" width="350" align="center" class-name="small-padding fixed-width">
@@ -26,7 +29,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.size"
+    <pagination v-show="total>0" :total="total" :page.sync="query.page+1" :limit.sync="query.size"
                 @pagination="find"/>
 
   </div>
@@ -52,7 +55,7 @@ export default {
       listLoading: true,
       query: {
         name: '',
-        page: 1,
+        page: 0,
         size: 10
       },
       testParams: {
@@ -69,12 +72,7 @@ export default {
   methods: {
     find() {
       this.listLoading = true
-      const query = {
-        name: this.query.name,
-        size: this.query.size,
-        page: this.query.page
-      }
-      MineApi.findProducts(query).then(data => {
+      MineApi.findProducts(this.query).then(data => {
         this.list = data.content
         this.total = data.totalElements
         this.listLoading = false
