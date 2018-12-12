@@ -12,5 +12,8 @@ export default {
   },
   findStock(query) {
     return Api.get('/api/v1/mine/stocks', query)
+  },
+  listFriend() {
+    return Api.get('/api/v1/mine/friends')
   }
 }

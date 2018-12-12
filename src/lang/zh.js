@@ -65,7 +65,8 @@ export default {
     externalLink: '外链',
     stockList: '仓库',
     productList: '商品',
-    inStock: '入库'
+    inStock: '入库',
+    purchaseCreate: '采购'
   },
   navbar: {
     logOut: '退出登录',

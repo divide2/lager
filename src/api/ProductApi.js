@@ -21,5 +21,8 @@ export default {
   },
   listProductSpec(productId) {
     return Api.get(`/api/v1/product/${productId}/specs`)
+  },
+  listByUser(userId) {
+    return Api.get(`/api/v1/product/${userId}/products`)
   }
 }
