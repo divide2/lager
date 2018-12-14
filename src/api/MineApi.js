@@ -8,7 +8,7 @@ export default {
     return Api.get('/api/v1/mine/products')
   },
   findProducts(query) {
-    return Api.get('/api/v1/mine/products/find', query)
+    return Api.get('/api/v1/mine/company/products', query)
   },
   findStock(query) {
     return Api.get('/api/v1/mine/stocks', query)

@@ -8,7 +8,7 @@
             <mine-friend-select v-model="purchase.toId" @change="onFriendChange"></mine-friend-select>
           </el-form-item>
           <el-form-item :label="$t('purchase.product')" prop="product">
-            <el-select>
+            <el-select v-model="purchase.productId" @change="onProductChange">
               <el-option v-for="p in products" :key="p.id" :label="p.name" :value="p.id"></el-option>
             </el-select>
           </el-form-item>
@@ -104,14 +104,13 @@ export default {
     },
     onFriendChange(id) {
       ProductApi.listByUser(id).then(data => {
-        this.products = data
+        this.products = data.content
       })
     },
     onProductChange(productId) {
-      ProductApi.listProductSpec(productId).then(data => {
-        this.product.specs = data
-        this.purchase.specStocks.push(...(data.map(item => ({ productSpecId: item.id, amount: 0,productId: productId }))))
-      })
+      const productSpecs =  this.products.find(item => item.id === productId).productSpecs
+      this.product.specs = productSpecs
+      this.purchase.specStocks.push(...(productSpecs.map(item => ({ productSpecId: item.id, amount: 0 }))))
     },
     /**
      * 解析文件

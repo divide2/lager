@@ -179,10 +179,13 @@ export default {
     specAmount: '规格数量'
   },
   purchase: {
+    friend: '好友',
+    product: '商品',
+    specAmount: '数量',
     earnestMoney: '定金',
     balancePayment: '尾款',
     deliveryDate: '交付日期',
     remarks: '备注'
-
   }
+
 }
