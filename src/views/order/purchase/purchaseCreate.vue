@@ -24,7 +24,20 @@
               </el-form-item>
             </el-col>
           </div>
+          <el-form-item :label="$t('purchase.earnestMoney')" prop="earnestMoney">
+            <el-input v-model="purchase.earnestMoney"/>
+          </el-form-item>
+          <el-form-item :label="$t('purchase.balancePayment')" prop="balancePayment">
+            <el-input v-model="purchase.balancePayment"/>
+          </el-form-item>
+          <el-form-item :label="$t('purchase.deliveryDate')" prop="deliveryDate">
+            <el-date-picker type="date" value-format="yyyy-MM-dd" v-model="purchase.deliveryDate"></el-date-picker>
+          </el-form-item>
+          <el-form-item :label="$t('purchase.remarks')" prop="remarks">
+            <el-input type="textarea" v-model="purchase.remarks"/>
+          </el-form-item>
         </el-col>
+
       </el-row>
     </el-form>
     <el-row style="text-align: center;margin-top: 20px;">
@@ -80,7 +93,7 @@ export default {
 
     save() {
       this.$refs['dataForm'].validate().then(() => {
-        return StockApi.add(this.purchase)
+        return PurchaseApi.add(this.purchase)
       }).then(() => this.back())
     },
     get() {
@@ -97,7 +110,7 @@ export default {
     onProductChange(productId) {
       ProductApi.listProductSpec(productId).then(data => {
         this.product.specs = data
-        this.purchase.specStocks.push(...(data.map(item => ({ productSpecId: item.id, amount: 0 }))))
+        this.purchase.specStocks.push(...(data.map(item => ({ productSpecId: item.id, amount: 0,productId: productId }))))
       })
     },
     /**

@@ -177,5 +177,12 @@ export default {
     warehouse: '仓库',
     amount: '数量',
     specAmount: '规格数量'
+  },
+  purchase: {
+    earnestMoney: '定金',
+    balancePayment: '尾款',
+    deliveryDate: '交付日期',
+    remarks: '备注'
+
   }
 }
