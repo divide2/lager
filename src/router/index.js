@@ -95,23 +95,5 @@ export const asyncRouterMap = [
   },
   stock,
   product,
-  {
-    path: '/base',
-    component: Layout,
-    redirect: '/base/cases/list',
-    name: 'Base',
-    meta: {
-      title: 'base',
-      icon: 'tree'
-    },
-    children: [
-      {
-        path: 'cases/list',
-        component: () => import('@/views/base/cases/list'),
-        name: 'casesList',
-        meta: { title: 'casesList', icon: 'list' }
-      }
-    ]
-  }
   // { path: '*', redirect: '/404', hidden: true }
 ]
