@@ -15,5 +15,8 @@ export default {
   },
   listFriend() {
     return Api.get('/api/v1/mine/friends')
+  },
+  async findPurchaseOrder(query) {
+    return await Api.get('/api/v1/mine/order/purchase',query)
   }
 }

@@ -12,18 +12,20 @@
               <el-option v-for="p in products" :key="p.id" :label="p.name" :value="p.id"></el-option>
             </el-select>
           </el-form-item>
-          <div v-for="(spec,index) in product.specs" :key="index">
-            <el-col :span="14">
-              <el-form-item :label="$t('product.specName')" prop="specName">
-                {{ spec.name }}
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item :label="$t('purchase.specAmount')" prop="specPrice" label-width="80px">
-                <el-input v-model="purchase.specStocks[index].amount"/>
-              </el-form-item>
-            </el-col>
-          </div>
+          <el-form-item label-width="0">
+            <div v-for="(spec,index) in product.specs" :key="index">
+              <el-col :span="14">
+                <el-form-item :label="$t('product.specName')" prop="specName">
+                  {{ spec.name }}
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item :label="$t('purchase.specAmount')" prop="specPrice" label-width="80px">
+                  <el-input v-model="purchase.productSpecPrices[index].amount"/>
+                </el-form-item>
+              </el-col>
+            </div>
+          </el-form-item>
           <el-form-item :label="$t('purchase.earnestMoney')" prop="earnestMoney">
             <el-input v-model="purchase.earnestMoney"/>
           </el-form-item>
@@ -31,7 +33,7 @@
             <el-input v-model="purchase.balancePayment"/>
           </el-form-item>
           <el-form-item :label="$t('purchase.deliveryDate')" prop="deliveryDate">
-            <el-date-picker type="date" value-format="yyyy-MM-dd" v-model="purchase.deliveryDate"></el-date-picker>
+            <el-date-picker type="date" value-format="yyyy-MM-dd" v-model="purchase.deliveryDate"/>
           </el-form-item>
           <el-form-item :label="$t('purchase.remarks')" prop="remarks">
             <el-input type="textarea" v-model="purchase.remarks"/>
@@ -51,14 +53,13 @@
 
 <script>
 import ProductApi from '@/api/ProductApi'
-import MineWarehouseSelect from '@/views/stock/stock/components/MineWarehouseSelect'
 import MineProductSelect from '@/views/stock/stock/components/MineProductSelect'
-import StockApi from '@/api/StockApi'
 import MineFriendSelect from '@/views/stock/stock/components/MineFriendSelect'
+import OrderApi from '@/api/OrderApi'
 
 export default {
   name: 'StockDetail',
-  components: { MineFriendSelect, MineProductSelect, MineWarehouseSelect },
+  components: { MineFriendSelect, MineProductSelect },
   props: {
     isEdit: {
       type: Boolean,
@@ -69,9 +70,9 @@ export default {
     return {
       purchase: {
         toId: null,
-        warehouseId: null,
-        productId: null,
-        specStocks: []
+        productSpecPrices: [],
+        productSpecId: null,
+        specName: ''
       },
       products: [],
       product: {
@@ -93,7 +94,7 @@ export default {
 
     save() {
       this.$refs['dataForm'].validate().then(() => {
-        return PurchaseApi.add(this.purchase)
+        return OrderApi.add(this.purchase)
       }).then(() => this.back())
     },
     get() {
@@ -108,9 +109,13 @@ export default {
       })
     },
     onProductChange(productId) {
-      const productSpecs =  this.products.find(item => item.id === productId).productSpecs
+      debugger
+      const productSpecs = this.products.find(item => item.id === productId).productSpecs
       this.product.specs = productSpecs
-      this.purchase.specStocks.push(...(productSpecs.map(item => ({ productSpecId: item.id, amount: 0 }))))
+      this.purchase.productSpecPrices.push(...(productSpecs.map(item => (
+        { productSpecId: item.id, amount: 0, productId: productId, specName: item.name }
+      ))))
+      console.log(productSpecs)
     },
     /**
      * 解析文件

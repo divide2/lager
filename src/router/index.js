@@ -93,6 +93,18 @@ export const asyncRouterMap = [
       }
     ]
   },
+  {
+    path: "/order/purchase",
+    component: Layout,
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/order/order/list'),
+        name: 'purchaseOrder',
+        meta: { title: 'purchaseOrder', icon: 'table' }
+      }
+    ]
+  },
   stock,
   product,
   // { path: '*', redirect: '/404', hidden: true }
