@@ -4,10 +4,10 @@
              style="margin-top: 50px">
       <el-row>
         <el-col :span="8">
-          <el-form-item :label="$t('purchase.friend')" prop="friend">
+          <el-form-item :label="$t('order.friend')" prop="friend">
             <mine-friend-select v-model="purchase.toId" @change="onFriendChange"></mine-friend-select>
           </el-form-item>
-          <el-form-item :label="$t('purchase.product')" prop="product">
+          <el-form-item :label="$t('order.product')" prop="product">
             <el-select v-model="purchase.productId" @change="onProductChange">
               <el-option v-for="p in products" :key="p.id" :label="p.name" :value="p.id"></el-option>
             </el-select>
@@ -20,22 +20,22 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item :label="$t('purchase.specAmount')" prop="specPrice" label-width="80px">
+                <el-form-item :label="$t('order.specAmount')" prop="specPrice" label-width="80px">
                   <el-input v-model="purchase.productSpecPrices[index].amount"/>
                 </el-form-item>
               </el-col>
             </div>
           </el-form-item>
-          <el-form-item :label="$t('purchase.earnestMoney')" prop="earnestMoney">
+          <el-form-item :label="$t('order.earnestMoney')" prop="earnestMoney">
             <el-input v-model="purchase.earnestMoney"/>
           </el-form-item>
-          <el-form-item :label="$t('purchase.balancePayment')" prop="balancePayment">
+          <el-form-item :label="$t('order.balancePayment')" prop="balancePayment">
             <el-input v-model="purchase.balancePayment"/>
           </el-form-item>
-          <el-form-item :label="$t('purchase.deliveryDate')" prop="deliveryDate">
+          <el-form-item :label="$t('order.deliveryDate')" prop="deliveryDate">
             <el-date-picker type="date" value-format="yyyy-MM-dd" v-model="purchase.deliveryDate"/>
           </el-form-item>
-          <el-form-item :label="$t('purchase.remarks')" prop="remarks">
+          <el-form-item :label="$t('order.remarks')" prop="remarks">
             <el-input type="textarea" v-model="purchase.remarks"/>
           </el-form-item>
         </el-col>

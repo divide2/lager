@@ -1,29 +1,31 @@
 <template>
   <div class="app-container">
     <query @search="find">
-      <query-item slot="query">
-        <el-input v-model="query.imei" :placeholder="$t('product.name')" style="width: 200px;"
-                  @keyup.enter.native="find"/>
-      </query-item>
-      <query-item slot="button">
-        <router-link class="filter-item" to="/product/add">
-          <el-button type="primary" icon="el-icon-edit">{{ $t('table.add') }}</el-button>
-        </router-link>
-      </query-item>
+      <template slot="query">
+        <query-item>
+          <el-input v-model="query.status" :placeholder="$t('order.status')"
+                    @keyup.enter.native="find"/>
+        </query-item>
+        <query-item>
+          <el-date-picker v-model="query.createTime" type="date" @change="find" value-format="yyyy-MM-dd"/>
+        </query-item>
+      </template>
     </query>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" prop="id" width="80"/>
-      <el-table-column align="center" label="ID" prop="id" width="100">
-        <img slot-scope="{row}" :src="row.image" width="90" height="90"/>
-      </el-table-column>
-      <el-table-column :label="$t('product.name')" width="160px" prop="name" align="center"/>
-      <el-table-column :label="$t('product.remarks')" prop="remarks" align="center"/>
-      <el-table-column :label="$t('table.actions')" width="350" align="center" class-name="small-padding fixed-width">
+      <el-table-column :label="$t('order.balancePayment')" width="160px" prop="balancePayment" align="center"/>
+      <el-table-column :label="$t('order.createTime')" width="160px" prop="createTime" align="center"/>
+      <el-table-column :label="$t('order.deliveryDate')" width="160px" prop="deliveryDate" align="center"/>
+      <el-table-column :label="$t('order.earnestMoney')" width="160px" prop="earnestMoney" align="center"/>
+      <el-table-column :label="$t('order.toName')" width="160px" prop="toName" align="center"/>
+      <el-table-column :label="$t('order.status')" width="160px" prop="status" align="center"/>
+      <el-table-column :label="$t('order.remarks')" prop="remarks" align="center"/>
+      <el-table-column :label="$t('table.actions')" width="180" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <router-link :to="'/product/update/'+scope.row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">{{ $t('table.edit') }}</el-button>
           </router-link>
-          <el-button type="danger" size="small" icon="el-icon-delete"
+          <el-button type="danger" style="margin-left:15px;" size="small" icon="el-icon-delete"
                      @click="remove(scope.row.id)">{{ $t('table.delete') }}
           </el-button>
         </template>
@@ -58,6 +60,18 @@ export default {
         name: '',
         page: 0,
         size: 10
+      },
+      x: {
+        balancePayment: 12,
+        createTime: '2018-12-18T20:00:10',
+        deliveryDate: '2018-12-11',
+        earnestMoney: 12,
+        fromId: 1,
+        id: 1,
+        orderId: 1,
+        remarks: '12',
+        toId: 2,
+        toName: '小婷婷'
       },
       testParams: {
         deviceId: null,
