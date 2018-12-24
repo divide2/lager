@@ -18,5 +18,8 @@ export default {
   },
   async findPurchaseOrder(query) {
     return await Api.get('/api/v1/mine/order/purchase',query)
+  },
+  async findSellOrder(query) {
+    return await Api.get('/api/v1/mine/order/sell', query)
   }
 }

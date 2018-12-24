@@ -99,9 +99,21 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'create',
-        component: () => import('@/views/order/order/list'),
+        component: () => import('@/views/order/purchase/list'),
         name: 'purchaseOrder',
         meta: { title: 'purchaseOrder', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: "/order/sell",
+    component: Layout,
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/order/purchase/list'),
+        name: 'sellOrder',
+        meta: { title: 'sellOrder', icon: 'table' }
       }
     ]
   },

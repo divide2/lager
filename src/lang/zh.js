@@ -66,7 +66,9 @@ export default {
     stockList: '仓库',
     productList: '商品',
     inStock: '入库',
-    purchaseCreate: '采购'
+    purchaseCreate: '采购',
+    purchaseOrder: '采购单',
+    sellOrder: '销售单'
   },
   navbar: {
     logOut: '退出登录',

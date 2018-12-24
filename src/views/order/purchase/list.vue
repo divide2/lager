@@ -22,9 +22,6 @@
       <el-table-column :label="$t('order.remarks')" prop="remarks" align="center"/>
       <el-table-column :label="$t('table.actions')" width="180" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <router-link :to="'/product/update/'+scope.row.id">
-            <el-button type="primary" size="small" icon="el-icon-edit">{{ $t('table.edit') }}</el-button>
-          </router-link>
           <el-button type="danger" style="margin-left:15px;" size="small" icon="el-icon-delete"
                      @click="remove(scope.row.id)">{{ $t('table.delete') }}
           </el-button>
@@ -32,14 +29,13 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.size"
-                @pagination="find"/>
+    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.size" @pagination="find"/>
 
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/Pagination'
+import Pagination from '@/components/Pagination/index'
 import ProductApi from '@/api/ProductApi' // Secondary package based on el-pagination
 import Query from '@/views/components/Query'
 import QueryItem from '@/views/components/QueryItem'
