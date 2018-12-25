@@ -21,5 +21,9 @@ export default {
   },
   async findSellOrder(query) {
     return await Api.get('/api/v1/mine/order/sell', query)
-  }
+  },
+  findReceiveOrder(query) {
+    return Api.get('/api/v1/mine/orders',query)
+  },
+
 }

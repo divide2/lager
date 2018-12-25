@@ -98,7 +98,7 @@ export const asyncRouterMap = [
     component: Layout,
     children: [
       {
-        path: 'create',
+        path: 'list',
         component: () => import('@/views/order/purchase/list'),
         name: 'purchaseOrder',
         meta: { title: 'purchaseOrder', icon: 'table' }
@@ -110,10 +110,10 @@ export const asyncRouterMap = [
     component: Layout,
     children: [
       {
-        path: 'create',
-        component: () => import('@/views/order/purchase/list'),
-        name: 'sellOrder',
-        meta: { title: 'sellOrder', icon: 'table' }
+        path: 'list',
+        component: () => import('@/views/order/receive/list'),
+        name: 'receiveOrder',
+        meta: { title: 'receiveOrder', icon: 'table' }
       }
     ]
   },

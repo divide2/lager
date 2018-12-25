@@ -68,7 +68,8 @@ export default {
     inStock: '入库',
     purchaseCreate: '采购',
     purchaseOrder: '采购单',
-    sellOrder: '销售单'
+    sellOrder: '销售单',
+    receiveOrder: '收到订单'
   },
   navbar: {
     logOut: '退出登录',
@@ -136,7 +137,8 @@ export default {
     cancel: '取 消',
     confirm: '确 定',
     addRow: '添加一条',
-    save: '保存'
+    save: '保存',
+    all: '全部'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -191,6 +193,11 @@ export default {
     toName: '好友',
     createTime: '下单日期',
     status: '状态'
+  },
+  status: {
+    order: {
+      waitingConfirm: '待确认',
+      waitingDeliver: '待发货'
+    }
   }
-
 }
