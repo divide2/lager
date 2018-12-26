@@ -13,17 +13,19 @@
     </query>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column align="center" label="ID" type="index" width="80"/>
-      <el-table-column :label="$t('order.balancePayment')" width="160px" prop="balancePayment" align="center"/>
+      <el-table-column :label="$t('order.balancePayment')"  prop="balancePayment" align="center"/>
       <el-table-column :label="$t('order.createTime')" width="160px" prop="createTime" align="center"/>
-      <el-table-column :label="$t('order.deliveryDate')" width="160px" prop="deliveryDate" align="center"/>
+      <el-table-column :label="$t('order.deliveryDate')" prop="deliveryDate" align="center"/>
       <el-table-column :label="$t('order.earnestMoney')" width="160px" prop="earnestMoney" align="center"/>
       <el-table-column :label="$t('order.toName')" width="160px" prop="fromName" align="center"/>
-      <el-table-column :label="$t('order.status')" width="160px" prop="status" align="center"/>
       <el-table-column :label="$t('order.remarks')" prop="remarks" align="center"/>
-      <el-table-column :label="$t('table.actions')" width="180" align="center" class-name="small-padding fixed-width">
+      <el-table-column :label="$t('table.actions')" v-if="query.status.trim()" width="180" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button type="danger" style="margin-left:15px;" size="small" icon="el-icon-delete"
-                     @click="remove(scope.row.id)">{{ $t('table.delete') }}
+          <el-button v-if="query.status==='waiting_confirm'" type="success" style="margin-left:15px;" size="small" icon="el-icon-check"
+                     @click="confirm(scope.row.id)">{{ $t('table.confirmOrder') }}
+          </el-button>
+          <el-button v-if="query.status==='waiting_deliver'" type="success" style="margin-left:15px;" size="small" icon="el-icon-check"
+                     @click="confirmDeliver(scope.row.id)">{{ $t('table.confirmDeliver') }}
           </el-button>
         </template>
       </el-table-column>
@@ -36,11 +38,11 @@
 
 <script>
 import Pagination from '@/components/Pagination/index'
-import ProductApi from '@/api/ProductApi' // Secondary package based on el-pagination
 import Query from '@/views/components/Query'
 import QueryItem from '@/views/components/QueryItem'
 import MineApi from '@/api/MineApi'
-import DictionaryApi from '@/api/DictionaryApi' // Waves directive
+import DictionaryApi from '@/api/DictionaryApi'
+import OrderApi from '@/api/OrderApi' // Waves directive
 
 export default {
 
@@ -74,12 +76,20 @@ export default {
       this.list = data.content
       this.total = data.totalElements
     },
-    remove(id) {
-      this.$confirm(this.$t('message.remove')).then(() => {
-        ProductApi.remove(id).then(() => {
-          this.find()
-        })
-      })
+    async confirm(id) {
+      await this.$confirm(this.$t('message.confirmOrder'))
+      await OrderApi.confirm(id)
+      this.find()
+    },
+    async confirmDeliver(id) {
+      await this.$confirm(this.$t('message.confirmDeliver'))
+      await OrderApi.confirmDeliver(id)
+      this.find()
+    },
+    async confirmReceive(id) {
+      await this.$confirm(this.$t('message.confirmDeliver'))
+      await OrderApi.confirmReceive(id)
+      this.find()
     },
     async listOrderStatus() {
       this.orderStatuses = await DictionaryApi.listByGroup("status.order")

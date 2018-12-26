@@ -1,5 +1,5 @@
 <template>
-  <device-detail is-edit/>
+  <product-detail is-edit></product-detail>
 </template>
 
 <script>

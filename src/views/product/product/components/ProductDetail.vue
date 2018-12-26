@@ -80,7 +80,8 @@ export default {
           price: '',
           name: ''
         }]
-      }
+      },
+      rules: {}
     }
   },
   created() {
@@ -106,7 +107,6 @@ export default {
     get() {
       ProductApi.get(this.product.id).then(data => {
         this.product = data
-        this.product.version = data.version || {}
       })
     },
     /**

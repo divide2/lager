@@ -63,7 +63,7 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    stockList: '仓库',
+    stockList: '库存',
     productList: '商品',
     inStock: '入库',
     purchaseCreate: '采购',
@@ -138,7 +138,10 @@ export default {
     confirm: '确 定',
     addRow: '添加一条',
     save: '保存',
-    all: '全部'
+    all: '全部',
+    confirmOrder: '确认订单',
+    confirmDeliver: '确认发货',
+    confirmReceive: '确认收货'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -197,7 +200,13 @@ export default {
   status: {
     order: {
       waitingConfirm: '待确认',
-      waitingDeliver: '待发货'
+      waitingDeliver: '待发货',
+      waitingReceive: '待收货',
+      finish: '订单完成'
     }
+  },
+  message: {
+    remove: '确定删除?',
+    confirmOrder: '确认订单?'
   }
 }

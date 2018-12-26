@@ -99,8 +99,7 @@ export default {
     },
     get() {
       ProductApi.get(this.product.id).then(data => {
-        this.product = data
-        this.product.version = data.version || {}
+        this.product = data.content
       })
     },
     onFriendChange(id) {
@@ -109,8 +108,7 @@ export default {
       })
     },
     onProductChange(productId) {
-      debugger
-      const productSpecs = this.products.find(item => item.id === productId).productSpecs
+      const productSpecs = this.products.find(item => item.id === productId).specs
       this.product.specs = productSpecs
       this.purchase.productSpecPrices.push(...(productSpecs.map(item => (
         { productSpecId: item.id, amount: 0, productId: productId, specName: item.name }

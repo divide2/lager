@@ -13,8 +13,8 @@ export default {
     {
       path: 'add',
       component: () => import('@/views/stock/stock/create'),
-      name: 'CreateStock',
-      meta: { title: 'createStock', icon: 'edit' },
+      name: 'inStock',
+      meta: { title: 'inStock', icon: 'edit' },
       hidden: true
     },
     {

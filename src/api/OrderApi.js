@@ -15,5 +15,14 @@ export default {
   },
   find(query) {
     return Api.get('/api/v1/order/find', query)
+  },
+  confirm(id) {
+    return Api.put('/api/v1/order/confirm',{ id: id})
+  },
+  confirmDeliver(id) {
+    return Api.put('/api/v1/order/confirm/deliver',{ id: id})
+  },
+  confirmReceive(id) {
+    return Api.put('/api/v1/order/confirm/receive',{ id: id})
   }
 }
