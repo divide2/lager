@@ -113,7 +113,6 @@ export default {
       this.purchase.productSpecPrices.push(...(productSpecs.map(item => (
         { productSpecId: item.id, amount: 0, productId: productId, specName: item.name }
       ))))
-      console.log(productSpecs)
     },
     /**
      * 解析文件

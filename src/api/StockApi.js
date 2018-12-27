@@ -15,5 +15,8 @@ export default {
   },
   find(query) {
     return Api.get('/api/v1/stock/find', query)
+  },
+  listByWarehouse(warehouseId) {
+    return Api.get(`/api/v1/stock/warehouse/${warehouseId}`)
   }
 }

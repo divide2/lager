@@ -86,11 +86,6 @@ export default {
       await OrderApi.confirmDeliver(id)
       this.find()
     },
-    async confirmReceive(id) {
-      await this.$confirm(this.$t('message.confirmDeliver'))
-      await OrderApi.confirmReceive(id)
-      this.find()
-    },
     async listOrderStatus() {
       this.orderStatuses = await DictionaryApi.listByGroup("status.order")
     }

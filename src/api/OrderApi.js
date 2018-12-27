@@ -24,5 +24,8 @@ export default {
   },
   confirmReceive(id) {
     return Api.put('/api/v1/order/confirm/receive',{ id: id})
+  },
+  listOrderProductSpecByOrder(orderId) {
+    return Api.get(`/api/v1/order/${orderId}/spec`)
   }
 }
