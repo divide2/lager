@@ -6,20 +6,31 @@
       </query-item>
       <query-item slot="button">
         <router-link class="filter-item" to="/stock/add">
-          <el-button type="primary" icon="el-icon-edit">{{ $t('table.add') }}</el-button>
+          <el-button type="primary" icon="el-icon-plus">{{ $t('route.inStock') }}</el-button>
         </router-link>
       </query-item>
     </query>
-    <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+    <el-table v-loading="listLoading" :data="list" type="expand" border fit highlight-current-row style="width: 100%">
+
       <el-table-column align="center" label="ID" type="index" width="80"/>
       <el-table-column :label="$t('product.image')" align="center" prop="id" width="100">
-        <img slot-scope="{row}" :src="row.product.image" width="90" height="90"/>
+        <img slot-scope="{row}" :src="row.productImage" width="90" height="90"/>
       </el-table-column>
-      <el-table-column :label="$t('product.name')" width="160px" prop="product.name" align="center" />
-      <el-table-column :label="$t('stock.amount')" width="160px" prop="amount" align="center" />
+      <el-table-column :label="$t('product.name')" width="160px" prop="productName" align="center" />
+      <el-table-column :label="$t('stock.amount')" width="160px" prop="productAmount" align="center" />
+      <el-table-column :label="$t('stock.specAmount')">
+        <template slot-scope="{ row }">
+          <div v-for="spec in row.specs" :key="spec.productSpecId">{{ spec.productSpecName }} : {{ spec.amount }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('table.actions')"  align="center">
+        <template slot-scope="{ row }">
+          <el-button type="primary">{{ $t('table.detail') }}</el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="query.page+1" :limit.sync="query.size"
+    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.size"
                 @pagination="find"/>
 
   </div>
@@ -49,7 +60,7 @@ export default {
         page: 0,
         size: 10,
         warehouseType: 'pair',
-        warehouseId: 1
+        warehouseId: null
       }
     }
   },

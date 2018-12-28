@@ -25,13 +25,26 @@
                      @click="confirm(scope.row.id)">{{ $t('table.confirmOrder') }}
           </el-button>
           <el-button v-if="query.status==='waiting_deliver'" type="success" style="margin-left:15px;" size="small" icon="el-icon-check"
-                     @click="confirmDeliver(scope.row.id)">{{ $t('table.confirmDeliver') }}
+                     @click="showConfirmDeliverDialog(scope.row.id)">{{ $t('table.confirmDeliver') }}
           </el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.size" @pagination="find"/>
+    
+    <el-dialog :visible.sync="confirmDeliverDialog">
+      <el-form ref="sendParamForm" :rules="rules" :model="sendParam" label-position="right" label-width="70px"
+               style="width: 400px; margin-left:50px;">
+        <el-form-item :label="$t('product.warehouse')" prop="warehouseId">
+          <mine-warehouse-select v-model="sendParam.warehouseId" @change="onWarehouseChange"></mine-warehouse-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="confirmDeliverDialog = false">{{ $t('table.cancel') }}</el-button>
+        <el-button type="primary" @click="confirmDeliver">{{ $t('table.confirm') }}</el-button>
+      </div>
+    </el-dialog>
 
   </div>
 </template>
@@ -42,25 +55,36 @@ import Query from '@/views/components/Query'
 import QueryItem from '@/views/components/QueryItem'
 import MineApi from '@/api/MineApi'
 import DictionaryApi from '@/api/DictionaryApi'
-import OrderApi from '@/api/OrderApi' // Waves directive
+import OrderApi from '@/api/OrderApi'
+import MineWarehouseSelect from '@/views/stock/stock/components/MineWarehouseSelect'
+import StockApi from '@/api/StockApi' // Waves directive
 
 export default {
 
   name: 'AutoTestList',
-  components: { QueryItem, Query, Pagination },
+  components: { MineWarehouseSelect, QueryItem, Query, Pagination },
   data() {
     return {
       list: [],
       cases: [],
       total: 0,
-      testDialogVisible: false,
+      confirmDeliverDialog: false,
       listLoading: true,
+      sendParam: {
+        warehouseId: null,
+        orderId: ''
+      },
+      orderSpec: [],
+      warehouseStock: [],
       orderStatuses: [],
       query: {
         name: '',
         status: ' ',
         page: 0,
         size: 10
+      },
+      rules: {
+        warehouseId: [{ required: true }]
       }
     }
   },
@@ -81,17 +105,29 @@ export default {
       await OrderApi.confirm(id)
       this.find()
     },
-    async confirmDeliver(id) {
+    async confirmDeliver() {
+      await this.$refs.sendParamForm.validate()
       await this.$confirm(this.$t('message.confirmDeliver'))
-      await OrderApi.confirmDeliver(id)
+      await OrderApi.confirmDeliver(this.sendParam)
       this.find()
     },
     async listOrderStatus() {
       this.orderStatuses = await DictionaryApi.listByGroup("status.order")
-    }
+    },
+    async onWarehouseChange(warehouseId) {
+      this.warehouseStock = await StockApi.listByWarehouse(warehouseId)
+    },
+    async listOrderProductSpec(orderId) {
+      this.orderSpec = await OrderApi.listOrderProductSpecByOrder(orderId)
+    },
     /**
-     * router
+     * inner
      */
+    showConfirmDeliverDialog(id) {
+      this.sendParam.orderId = id
+      this.listOrderProductSpec(id)
+      this.confirmDeliverDialog = true
+    }
 
   }
 }

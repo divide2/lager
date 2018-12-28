@@ -99,20 +99,10 @@ export default {
       this.list = data.content
       this.total = data.totalElements
     },
-    async confirm(id) {
-      await this.$confirm(this.$t('message.confirmOrder'))
-      await OrderApi.confirm(id)
-      this.find()
-    },
-    async confirmDeliver(id) {
-      await this.$confirm(this.$t('message.confirmDeliver'))
-      await OrderApi.confirmDeliver(id)
-      this.find()
-    },
     async confirmReceive(id) {
       await this.$refs.receiveParamForm.validate()
       await this.$confirm(this.$t('message.confirmDeliver'))
-      await OrderApi.confirmReceive(id)
+      await OrderApi.confirmReceive(this.receiveParam)
       this.find()
     },
     async listOrderStatus() {

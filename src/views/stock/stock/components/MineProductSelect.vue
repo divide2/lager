@@ -33,7 +33,7 @@ export default {
   },
   created() {
     MineApi.listProducts().then(data => {
-      this.list = data
+      this.list = data.content
     })
   },
   methods: {

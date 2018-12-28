@@ -66,6 +66,7 @@ export default {
     stockList: '库存',
     productList: '商品',
     inStock: '入库',
+    outStock: '出库',
     purchaseCreate: '采购',
     purchaseOrder: '采购单',
     sellOrder: '销售单',
@@ -141,7 +142,8 @@ export default {
     all: '全部',
     confirmOrder: '确认订单',
     confirmDeliver: '确认发货',
-    confirmReceive: '确认收货'
+    confirmReceive: '确认收货',
+    detail: '详情'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -207,6 +209,8 @@ export default {
   },
   message: {
     remove: '确定删除?',
-    confirmOrder: '确认订单?'
+    confirmOrder: '确认订单?',
+    confirmDeliver: '确认发货?',
+    confirmReceive: '确认收货?'
   }
 }

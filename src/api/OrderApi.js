@@ -19,11 +19,11 @@ export default {
   confirm(id) {
     return Api.put('/api/v1/order/confirm',{ id: id})
   },
-  confirmDeliver(id) {
-    return Api.put('/api/v1/order/confirm/deliver',{ id: id})
+  confirmDeliver(param) {
+    return Api.put('/api/v1/order/confirm/deliver',param)
   },
-  confirmReceive(id) {
-    return Api.put('/api/v1/order/confirm/receive',{ id: id})
+  confirmReceive(param) {
+    return Api.put('/api/v1/order/confirm/receive',param)
   },
   listOrderProductSpecByOrder(orderId) {
     return Api.get(`/api/v1/order/${orderId}/spec`)
