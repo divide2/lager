@@ -143,7 +143,12 @@ export default {
     confirmOrder: '确认订单',
     confirmDeliver: '确认发货',
     confirmReceive: '确认收货',
-    detail: '详情'
+    detail: '详情',
+    send: '发送',
+    sendMessage: '发送消息',
+    deleteFriend: '删除好友',
+    friend: '好友',
+    chat: '聊天'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -212,5 +217,9 @@ export default {
     confirmOrder: '确认订单?',
     confirmDeliver: '确认发货?',
     confirmReceive: '确认收货?'
+  },
+  friend: {
+    memoName: '备注',
+    avatar: '头像'
   }
 }

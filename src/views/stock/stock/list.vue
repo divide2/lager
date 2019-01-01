@@ -23,11 +23,6 @@
           <div v-for="spec in row.specs" :key="spec.productSpecId">{{ spec.productSpecName }} : {{ spec.amount }}</div>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.actions')"  align="center">
-        <template slot-scope="{ row }">
-          <el-button type="primary">{{ $t('table.detail') }}</el-button>
-        </template>
-      </el-table-column>
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.size"

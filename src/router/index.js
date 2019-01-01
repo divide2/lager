@@ -82,6 +82,18 @@ export default new Router({
 export const asyncRouterMap = [
   /** When your routing table is too long, you can split it into small modules**/
   {
+    path: "/message",
+    component: Layout,
+    children: [
+      {
+        path: 'message',
+        component: () => import('@/views/message/index'),
+        name: 'message',
+        meta: { title: 'message', icon: 'message' }
+      }
+    ]
+  },
+  {
     path: "/purchase",
     component: Layout,
     children: [

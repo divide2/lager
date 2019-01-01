@@ -27,5 +27,8 @@ export default {
   },
   findSendOrder(query) {
     return Api.get('/api/v1/mine/order/send',query)
+  },
+  listChat() {
+    return Api.get('/api/v1/mine/chats')
   }
 }

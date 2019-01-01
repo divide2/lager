@@ -5,7 +5,15 @@
 </template>
 
 <script>
-export default{
-  name: 'App'
+
+export default {
+  name: 'App',
+  mounted() {
+    this.connect()
+  },
+  methods: {
+    connect() {
+    }
+  }
 }
 </script>
